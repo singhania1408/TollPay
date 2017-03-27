@@ -8,7 +8,10 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.razorpay.Checkout;
 import com.razorpay.PaymentResultListener;
@@ -25,12 +28,16 @@ public class PaymentResult extends AppCompatActivity implements PaymentResultLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_result);
+
+        /*getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);*/
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         startPayment();
-
-    }
+    }/**/
 
     @Override
     public void onPaymentSuccess(String s) {
@@ -42,10 +49,21 @@ public class PaymentResult extends AppCompatActivity implements PaymentResultLis
 
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
     public void startPayment() {
-        /**
-         * Instantiate Checkout
-         */
+
+
         Checkout checkout = new Checkout();
 
         /**
@@ -84,7 +102,7 @@ public class PaymentResult extends AppCompatActivity implements PaymentResultLis
              * Amount is always passed in PAISE
              * Eg: "500" = Rs 5.00
              */
-            options.put("amount", "50");
+            options.put("amount", "500");
             checkout.setFullScreenDisable(true);
             checkout.open(activity, options);
         } catch(Exception e) {
