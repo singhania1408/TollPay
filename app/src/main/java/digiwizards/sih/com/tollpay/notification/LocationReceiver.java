@@ -35,6 +35,8 @@ public class LocationReceiver extends AppCompatActivity {
 
                 Toast.makeText(this,"Yeaah Location is getting"+lastLocation.getSpeed()+" "+lastLocation.getLongitude()
                         +" "+lastLocation.getLatitude(),Toast.LENGTH_SHORT).show();
+
+
             }
         }
 
